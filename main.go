@@ -10,8 +10,8 @@ func userData() (curType string, curAmount float64) {
 	return curType, curAmount
 }
 
-func convertCurrency(fromCur string, toCur string, curAmount float64) (conversionResult, float64) {
-
+func convertCurrency(fromCur string, toCur string, curAmount float64) (conversionResult float64) {
+	return 0.0
 }
 
 func main() {
