@@ -35,6 +35,9 @@ func userData() (fromCur string, toCur string,curAmount float64) {
 }
 
 func convertCurrency(fromCur string, toCur string, curAmount float64) (conversionResult float64) {
+	const usdToEur = 0.85
+	const usdToRub = 75.0
+	const eurToRub = usdToEur * usdToRub
 	switch fromCur {
 	case "USD":
 		if toCur == "EUR" {
@@ -59,9 +62,6 @@ func convertCurrency(fromCur string, toCur string, curAmount float64) (conversio
 }
 
 func main() {
-	const usdToEur = 0.85
-	const usdToRub = 75.0
-	const eurToRub = usdToEur * usdToRub
 	fromCur, toCur, curAmount := userData()
 	result := convertCurrency(fromCur, toCur, curAmount)
 	fmt.Printf("%.2f %s = %.2f %s\n", curAmount, fromCur, result, toCur)
