@@ -37,37 +37,14 @@ func userData() (fromCur string, toCur string, curAmount float64) {
 
 }
 
-func convertCurrency(fromCur *string, toCur *string, curAmount *float64) (conversionResult float64) {
-	myCurMap := map[string]float64{"USDEUR": 0.85, "USDRUB": 75.0, "EURUSD": 1 / 0.85, "EURRUB": 75.0 / 0.85, "RUBUSD": 1 / 75.0, "RUBEUR": 0.85 / 75.0}
-	conversionResult = *curAmount * myCurMap[*fromCur+*toCur]
-	// const usdToEur = 0.85
-	// const usdToRub = 75.0
-	// const eurToRub = usdToEur * usdToRub
-	// switch fromCur {
-	// case "USD":
-	// 	if toCur == "EUR" {
-	// 		conversionResult = curAmount * usdToEur
-	// 	} else if toCur == "RUB" {
-	// 		conversionResult = curAmount * usdToRub
-	// 	}
-	// case "EUR":
-	// 	if toCur == "USD" {
-	// 		conversionResult = curAmount / usdToEur
-	// 	} else if toCur == "RUB" {
-	// 		conversionResult = curAmount / usdToEur * usdToRub
-	// 	}
-	// case "RUB":
-	// 	if toCur == "USD" {
-	// 		conversionResult = curAmount / usdToRub
-	// 	} else if toCur == "EUR" {
-	// 		conversionResult = curAmount / usdToRub * usdToEur
-	// 	}
-	// }
+func convertCurrency(myCurMap *map[string]float64, fromCur *string, toCur *string, curAmount *float64) (conversionResult float64) {
+	conversionResult = *curAmount * (*myCurMap)[(*fromCur)+(*toCur)]
 	return conversionResult
 }
 
 func main() {
+	myCurMap := map[string]float64{"USDEUR": 0.85, "USDRUB": 75.0, "EURUSD": 1 / 0.85, "EURRUB": 75.0 / 0.85, "RUBUSD": 1 / 75.0, "RUBEUR": 0.85 / 75.0}
 	fromCur, toCur, curAmount := userData()
-	result := convertCurrency(&fromCur, &toCur, &curAmount)
+	result := convertCurrency(&myCurMap, &fromCur, &toCur, &curAmount)
 	fmt.Printf("%.2f %s = %.2f %s\n", curAmount, fromCur, result, toCur)
 }
